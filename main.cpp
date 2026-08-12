@@ -6,12 +6,12 @@
 #include <windows.h>
 #endif
 
-void fill_field(char32_t field[FIELD_SIZE][FIELD_SIZE]);
-void print_field(const char32_t field[FIELD_SIZE][FIELD_SIZE]);
+void fill_field(char32_t field[HEIGHT][WIDTH]);
+void print_field(const char32_t field[HEIGHT][WIDTH]);
 void newScreen();
-void generate_starting_food(char32_t field[FIELD_SIZE][FIELD_SIZE]);
+void generate_starting_food(char32_t field[HEIGHT][WIDTH]);
 
-char32_t field[FIELD_SIZE][FIELD_SIZE];
+char32_t field[HEIGHT][WIDTH];
 
 int main()
 {
