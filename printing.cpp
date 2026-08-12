@@ -35,6 +35,13 @@ void print_field(const char32_t field[HEIGHT][WIDTH])
     }
 }
 
+void deathScreen()
+{
+    std::cout << "=============+++============" << std::endl;
+    std::cout << "Mother ant starved to death!" << std::endl;
+    std::cout << "=============+++============" << std::endl;
+}
+
 void newScreen()
 {
     printf("\033[2J\033[H");
