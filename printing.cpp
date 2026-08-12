@@ -1,9 +1,9 @@
 #include <iostream>
 #include "config.h"
 #include "symbols.h"
+#include <uchar.h>
 
-
-void fill_field(std::string field[FIELD_SIZE][FIELD_SIZE])
+void fill_field(char32_t field[FIELD_SIZE][FIELD_SIZE])
 {
     int i, j;
     for (i = 0; i < FIELD_SIZE; i++)
@@ -14,7 +14,7 @@ void fill_field(std::string field[FIELD_SIZE][FIELD_SIZE])
                 field[i][j] = EMPTY;
 }
 
-void print_field(std::string field[FIELD_SIZE][FIELD_SIZE])
+void print_field(char32_t field[FIELD_SIZE][FIELD_SIZE])
 {
     int i, j;
     for (i = 0; i < FIELD_SIZE; i++) {

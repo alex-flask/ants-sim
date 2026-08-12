@@ -3,12 +3,12 @@
 #include <chrono>
 #include "config.h"
 
-
-void fill_field(std::string field[FIELD_SIZE][FIELD_SIZE]);
-void print_field(std::string field[FIELD_SIZE][FIELD_SIZE]);
+void fill_field(char32_t field[FIELD_SIZE][FIELD_SIZE]);
+void print_field(char32_t field[FIELD_SIZE][FIELD_SIZE]);
 void newScreen();
+void generate_starting_food(char32_t field[FIELD_SIZE][FIELD_SIZE]);
 
-std::string field[FIELD_SIZE][FIELD_SIZE];
+char32_t field[FIELD_SIZE][FIELD_SIZE];
 
 int main()
 {
@@ -17,6 +17,7 @@ int main()
 
     //MARK: setup
     fill_field(field);
+    generate_starting_food(field);
 
     while (true) {
         newScreen();
