@@ -6,7 +6,10 @@ void fill_field(std::string field[FIELD_SIZE][FIELD_SIZE])
     int i, j;
     for (i = 0; i < FIELD_SIZE; i++)
         for (j = 0; j < FIELD_SIZE; j++)
-            field[i][j] = " ";
+            if (i==0 || j==0 || i==FIELD_SIZE-1 || j==FIELD_SIZE-1)
+                field[i][j] = "#";
+            else
+                field[i][j] = " ";
 }
 
 void print_field(std::string field[FIELD_SIZE][FIELD_SIZE])
