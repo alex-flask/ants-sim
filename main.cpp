@@ -13,6 +13,8 @@ void generate_starting_food(char32_t field[HEIGHT][WIDTH]);
 
 char32_t field[HEIGHT][WIDTH];
 
+int mother_ant_hunger = MOTHER_ANT_HUNGER_TIMER;
+
 int main()
 {
 #ifdef _WIN32
@@ -27,11 +29,12 @@ int main()
 
     while (true) {
         newScreen();
-        std::cout << "Hello, world!" << " " << counter << std::endl;
+        std::cout << "Tick: " <<  counter << " | " << "Mother ant hunger: " << mother_ant_hunger << std::endl;
         print_field(field);
 
         counter++;
         std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        mother_ant_hunger--;
     }
 
     return 0;
