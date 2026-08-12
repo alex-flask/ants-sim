@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <thread>
 #include <chrono>
 #include "config.h"
@@ -6,10 +7,13 @@
 #include <windows.h>
 #endif
 
+#define NEED_STARTING_FOOD 0
+
 void fill_field(char32_t field[HEIGHT][WIDTH]);
 void print_field(const char32_t field[HEIGHT][WIDTH]);
 void newScreen();
 void generate_starting_food(char32_t field[HEIGHT][WIDTH]);
+void generate_food(char32_t field[HEIGHT][WIDTH]);
 
 char32_t field[HEIGHT][WIDTH];
 
@@ -25,11 +29,15 @@ int main()
 
     //MARK: setup
     fill_field(field);
-    generate_starting_food(field);
+    std::srand(std::time(0));
+
+    if (NEED_STARTING_FOOD)
+        generate_starting_food(field);
 
     while (true) {
         newScreen();
         std::cout << "Tick: " <<  counter << " | " << "Mother ant hunger: " << mother_ant_hunger << std::endl;
+        generate_food(field);
         print_field(field);
 
         counter++;

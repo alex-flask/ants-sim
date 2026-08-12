@@ -1,3 +1,6 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "config.h"
 #include "symbols.h"
 
@@ -13,3 +16,30 @@ void generate_starting_food(char32_t field[HEIGHT][WIDTH])
         for (j = WIDTH - 2; j > WIDTH / 2; j--)
             change_pixel_state(&field[i][j], FOOD);
 }
+
+int suitable_place(int x, int y, char32_t field[HEIGHT][WIDTH])
+{
+    int i, j;
+    for (i = -1; i < 2; i++)
+        for (j = -1; j < 2; j++)
+            if ((x + i) <= WIDTH - 1 && (x + i) >= 0 && (y + j) <= HEIGHT - 1 && (y + j) >= 0)
+                if (field[y + j][x + i] != U' ')
+                    return 0;
+    return 1;
+}
+
+void generate_food(char32_t field[HEIGHT][WIDTH])
+{
+    int att = 3;
+    int y = std::rand() % (HEIGHT - 1) + 1,
+        x = std::rand() % (WIDTH - 1) + 1;
+    while (att > 0) {
+        if (suitable_place(x, y, field)) {
+            change_pixel_state(&field[y][x], FOOD);
+            return;
+        }
+        att--;
+    }
+    std::cout << "NO FOOD GENERATED THIS TICK, LOSER" << std::endl;
+}
+
