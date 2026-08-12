@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
 #include "config.h"
 #include "symbols.h"
 #include <random>

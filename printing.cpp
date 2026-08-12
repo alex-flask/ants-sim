@@ -35,11 +35,12 @@ void print_field(const char32_t field[HEIGHT][WIDTH])
     }
 }
 
-void deathScreen()
+void deathScreen(int score)
 {
-    std::cout << "=============+++============" << std::endl;
-    std::cout << "Mother ant starved to death!" << std::endl;
-    std::cout << "=============+++============" << std::endl;
+    std::cout << "=================+++=================" << std::endl;
+    std::cout << "  " << "Mother ant starved to death!" << std::endl;
+    std::cout << "  " << "Ants have survived for: " << score << " seconds" << std::endl;
+    std::cout << "=================+++=================" << std::endl;
 }
 
 void newScreen()

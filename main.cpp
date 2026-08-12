@@ -12,7 +12,7 @@
 void fill_field(char32_t field[HEIGHT][WIDTH]);
 void print_field(const char32_t field[HEIGHT][WIDTH]);
 void newScreen();
-void deathScreen();
+void deathScreen(int score);
 
 void generate_starting_food(char32_t field[HEIGHT][WIDTH]);
 void generate_food(char32_t field[HEIGHT][WIDTH]);
@@ -57,7 +57,7 @@ int main()
 
         if (mother_ant_hunger <= 0) {
             newScreen();
-            deathScreen();
+            deathScreen(counter);
             alive=false;
         }
     }
