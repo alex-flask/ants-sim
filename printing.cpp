@@ -1,5 +1,7 @@
 #include <iostream>
 #include "config.h"
+#include "symbols.h"
+
 
 void fill_field(std::string field[FIELD_SIZE][FIELD_SIZE])
 {
@@ -7,9 +9,9 @@ void fill_field(std::string field[FIELD_SIZE][FIELD_SIZE])
     for (i = 0; i < FIELD_SIZE; i++)
         for (j = 0; j < FIELD_SIZE; j++)
             if (i==0 || j==0 || i==FIELD_SIZE-1 || j==FIELD_SIZE-1)
-                field[i][j] = "#";
+                field[i][j] = BARRIER;
             else
-                field[i][j] = " ";
+                field[i][j] = EMPTY;
 }
 
 void print_field(std::string field[FIELD_SIZE][FIELD_SIZE])

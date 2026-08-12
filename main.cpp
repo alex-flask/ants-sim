@@ -3,6 +3,7 @@
 #include <chrono>
 #include "config.h"
 
+
 void fill_field(std::string field[FIELD_SIZE][FIELD_SIZE]);
 void print_field(std::string field[FIELD_SIZE][FIELD_SIZE]);
 void newScreen();
