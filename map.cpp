@@ -12,6 +12,17 @@ void change_pixel_state(char32_t *pixel, char32_t symbol)
     *pixel = symbol;
 }
 
+void generate_starter_ant(char32_t field[HEIGHT][WIDTH])
+{
+    for (int i = mother_ant_i - 1; i <= mother_ant_i + 1; i++)
+        for (int j = mother_ant_j - 1; j <= mother_ant_j + 1; j++)
+            if (field[i][j] == EMPTY){
+                field[i][j] = ANT;
+                return;
+            }
+
+}
+
 void generate_mother_ant(char32_t field[HEIGHT][WIDTH])
 {
     std::random_device rd; // obtain a random number from hardware
@@ -22,6 +33,8 @@ void generate_mother_ant(char32_t field[HEIGHT][WIDTH])
     mother_ant_j = distr_x(gen);
     std::cout << "Mother ant generated at (" << mother_ant_i << ", " << mother_ant_j << ")" << std::endl;
     change_pixel_state(&field[mother_ant_i][mother_ant_j], ANT_MOTHER);
+
+    generate_starter_ant(field);
 }
 
 void generate_starting_food(char32_t field[HEIGHT][WIDTH])
@@ -57,6 +70,8 @@ void generate_food(char32_t field[HEIGHT][WIDTH])
     }
     std::cout << "NO FOOD GENERATED THIS TICK, LOSER" << std::endl;
 }
+
+
 
 int count_empty_near_mother_ant(char32_t field[HEIGHT][WIDTH])
 {
