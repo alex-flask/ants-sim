@@ -12,6 +12,9 @@ struct Ant {
 
     int goal_x;
     int goal_y;
+
+    int next_x;
+    int next_y;
 };
 
 int mother_ant_i;
@@ -113,7 +116,26 @@ int count_food_near_mother_ant(char32_t field[HEIGHT][WIDTH])
     return food_nearby;
 }
 
-void pathfind(char32_t field[HEIGHT][WIDTH])
+void set_ants_next_pos(Ant ant)
+{
+    int foodRight = ant.goal_x - ant.pos_x;
+    int foodUp = ant.goal_y - ant.pos_y;
+
+    if (foodRight > 0)
+        ant.next_x++;
+    else if (foodRight < 0)
+        ant.next_x--;
+    else if (foodUp > 0)
+        ant.next_y++;
+    else if (foodUp < 0)
+        ant.next_y--;
+}
+
+void move_all_ants(char32_t field[HEIGHT][WIDTH])
+{
+}
+
+void choose_goal(char32_t field[HEIGHT][WIDTH])
 {
     for (Ant& ant : ants) {
         if (ant.goal_x == -1 && ant.goal_y == -1) {
@@ -122,5 +144,7 @@ void pathfind(char32_t field[HEIGHT][WIDTH])
             ant.goal_y = food[seed].second;
         }
         std::cout << "Ant goal: (" << ant.goal_x << ", " << ant.goal_y << ")" << std::endl;
+        set_ants_next_pos(ant);
     }
 }
+
