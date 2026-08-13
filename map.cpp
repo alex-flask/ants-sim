@@ -3,21 +3,40 @@
 #include "config.h"
 #include "symbols.h"
 #include <random>
+#include <vector>
+
+
+struct Ant {
+    int pos_x;
+    int pos_y;
+
+    int goal_x;
+    int goal_y;
+};
 
 int mother_ant_i;
 int mother_ant_j;
+
+std::vector<Ant> ants;
+
+std::vector<std::pair<int, int>> food;
+
+
 
 void change_pixel_state(char32_t *pixel, char32_t symbol)
 {
     *pixel = symbol;
 }
 
-void generate_starter_ant(char32_t field[HEIGHT][WIDTH])
+void generate_ant(char32_t field[HEIGHT][WIDTH])
 {
     for (int i = mother_ant_i - 1; i <= mother_ant_i + 1; i++)
         for (int j = mother_ant_j - 1; j <= mother_ant_j + 1; j++)
             if (field[i][j] == EMPTY){
                 field[i][j] = ANT;
+
+                ants.push_back({j, i, -1, -1});
+
                 return;
             }
 
@@ -34,7 +53,7 @@ void generate_mother_ant(char32_t field[HEIGHT][WIDTH])
     std::cout << "Mother ant generated at (" << mother_ant_i << ", " << mother_ant_j << ")" << std::endl;
     change_pixel_state(&field[mother_ant_i][mother_ant_j], ANT_MOTHER);
 
-    generate_starter_ant(field);
+    generate_ant(field);
 }
 
 void generate_starting_food(char32_t field[HEIGHT][WIDTH])
@@ -64,6 +83,7 @@ void generate_food(char32_t field[HEIGHT][WIDTH])
     while (att > 0) {
         if (suitable_place(x, y, field)) {
             change_pixel_state(&field[y][x], FOOD);
+            food.push_back({x,y});
             return;
         }
         att--;
@@ -91,4 +111,16 @@ int count_food_near_mother_ant(char32_t field[HEIGHT][WIDTH])
             if (field[i][j] == FOOD)
             food_nearby++;
     return food_nearby;
+}
+
+void pathfind(char32_t field[HEIGHT][WIDTH])
+{
+    for (Ant& ant : ants) {
+        if (ant.goal_x == -1 && ant.goal_y == -1) {
+            int seed = rand()%food.size();
+            ant.goal_x = food[seed].first;
+            ant.goal_y = food[seed].second;
+        }
+        std::cout << "Ant goal: (" << ant.goal_x << ", " << ant.goal_y << ")" << std::endl;
+    }
 }

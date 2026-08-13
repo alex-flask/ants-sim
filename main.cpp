@@ -17,6 +17,8 @@ void deathScreen(int score);
 void generate_starting_food(char32_t field[HEIGHT][WIDTH]);
 void generate_food(char32_t field[HEIGHT][WIDTH]);
 
+void pathfind(char32_t field[HEIGHT][WIDTH]);
+
 void generate_mother_ant(char32_t field[HEIGHT][WIDTH]);
 int count_empty_near_mother_ant(char32_t field[HEIGHT][WIDTH]);
 int count_food_near_mother_ant(char32_t field[HEIGHT][WIDTH]);
@@ -60,6 +62,8 @@ int main()
             deathScreen(counter);
             alive=false;
         }
+
+        pathfind(field);
     }
 
     return 0;
